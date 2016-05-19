@@ -22,7 +22,8 @@ routeApp.config(['$routeProvider',
             otherwise({
                 redirectTo: '/screenA'
             });
-    }]);
+    }
+]);
 
 routeApp.controller('ShowScreenA', function ($scope) {
     $scope.message = 'Content Screen A';

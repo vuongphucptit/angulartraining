@@ -6,7 +6,10 @@ if (ua.indexOf("Safari") != -1 || (ua.indexOf("MSIE") != -1 ) || (!!document.doc
 
 var appAngular = angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngRoute']);
 
-appAngular.controller('AppCtrl', function ($scope, $mdDialog, $mdMedia) {
+appAngular.controller('AppCtrl', function ($scope, $mdDialog, $mdMedia, $compile) {
+    // append element to document
+    angular.element(document.querySelector('#btnId')).append($compile('<md-button id="btnPopup" class="md-primary md-raised" ng-click="showPopup($event)">Open Dialog</md-button>')($scope));
+
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
 
     $scope.showPopup = function (ev) {
@@ -26,7 +29,6 @@ appAngular.controller('AppCtrl', function ($scope, $mdDialog, $mdMedia) {
         }, function (wantsFullScreen) {
             $scope.customFullscreen = (wantsFullScreen === true);
         });
-
     };
 });
 
@@ -37,9 +39,5 @@ function DialogController($scope, $mdDialog) {
 
     $scope.cancel = function () {
         $mdDialog.cancel();
-    };
-
-    $scope.answer = function (answer) {
-        $mdDialog.hide(answer);
     };
 }
